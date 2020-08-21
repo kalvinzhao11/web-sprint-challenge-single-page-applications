@@ -2,7 +2,7 @@ import React from 'react'
 import {useHistory } from 'react-router-dom'
 
 const Form = (props) => {
-    const {submit, update, value, error, disabled} = props
+    const {submit, update, value, error, disabled, checkboxChange} = props
 
     const history = useHistory()
     const toPizza = () => {
@@ -18,6 +18,11 @@ const Form = (props) => {
         update(name, value)
     }
 
+    const onCheckboxChange = evt => {
+        const { name, checked } = evt.target
+        checkboxChange(name, checked)
+      }
+
     return (
         <form onSubmit={onSubmit}>
 
@@ -29,7 +34,7 @@ const Form = (props) => {
                 type='text'
             />
             </label>
-            {/* <Error>{error.name}</Error> */}
+            <div>{error.name}</div>
 
             <label>Choice of Side&nbsp;
             <select 
@@ -41,7 +46,7 @@ const Form = (props) => {
                 <option value="fries">fries</option>
             </select>
             </label>
-            {/* <Error>{error.size}</Error> */}
+            <div>{error.size}</div>
 
             <label>Choice of Sauce</label>
             <label>Original Red&nbsp;
@@ -83,6 +88,42 @@ const Form = (props) => {
                     onChange={onInputChange}
                     />
             </label>
+            <div>{error.sauce}</div>
+
+            <label>Toppings</label>
+            <label>Pepperoni&nbsp;
+            <input 
+                type='checkbox'
+                name='pepperoni'
+                checked={value.toppings.pepperoni}
+                onChange={onCheckboxChange}
+            />
+            </label>
+            <label>Sausage&nbsp;
+            <input 
+                type='checkbox'
+                name='sausage'
+                checked={value.toppings.sausage}
+                onChange={onCheckboxChange}
+            />
+            </label>
+            <label>Canadian Bacon&nbsp;
+            <input 
+                type='checkbox'
+                name='bacon'
+                checked={value.toppings.bacon}
+                onChange={onCheckboxChange}
+            />
+            </label>
+            <label>Spicy Italian Sausage&nbsp;
+            <input 
+                type='checkbox'
+                name='spicySausage'
+                checked={value.toppings.spicySausage}
+                onChange={onCheckboxChange}
+            />
+            </label>
+            <div/>
 
             <label>Special Instrucution&nbsp;
             <input
@@ -91,9 +132,8 @@ const Form = (props) => {
                 name='special'
                 type='text'
             />
-            
             </label>
-        {/* <Error>{error.tos}</Error> */}
+            <div>{error.special}</div>
 
         <button onSubmit={onsubmit} disabled={disabled}>Submit</button>
         </form>

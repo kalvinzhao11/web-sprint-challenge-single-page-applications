@@ -11,7 +11,13 @@ const Home = (props) => {
         name: '',
         side: '',
         sauce: '',
-        special: ''
+        special: '',
+        toppings: {
+            pepperoni: false,
+            sausage: false,
+            bacon: false, 
+            spicySausage: false,
+        },
       }
     
       // the current form to be submitted
@@ -67,9 +73,24 @@ const Home = (props) => {
           side: currentForm.side,
           sauce: currentForm.sauce,
           special: currentForm.special.trim(),
+          toppings: Object.keys(currentForm.toppings).filter(t => {
+            return currentForm.toppings[t] //only filter the truely
+          })
         }
         if (!appendForm.name || !appendForm.side ) return
         postCredential(appendForm)
+      }
+
+      const checkboxChange = (name, isChecked) => {
+        // 🔥 STEP 7- IMPLEMENT!
+        //  set a new state for the whole form
+        setCurrentForm({
+          ...currentForm,
+          toppings: {
+            ...currentForm.toppings,
+            [name] : isChecked
+          }
+        })
       }
     
       useEffect(() => {
@@ -86,6 +107,7 @@ const Home = (props) => {
                 <Form 
                     submit={submitForm}
                     update={updateForm}
+                    checkboxChange={checkboxChange}
                     value={currentForm}
                     error={error}
                     disabled={disabled}
