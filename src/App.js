@@ -9,7 +9,6 @@ const App = () => {
       <p>Your favorite food, delivered while coding</p>
       <Link to='/'>Home</Link>
       <Link to='/pizza'>Pizza</Link>
-      {/* <Link to='/'>Home</Link> */}
 
       <Switch>
         <Route path='/'><Home/></Route>

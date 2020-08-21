@@ -9,6 +9,7 @@ import Pizza from './Pizza'
 const Home = (props) => {
     const initialForm = {
         name: '',
+        size: 'small',
         side: '',
         sauce: '',
         special: '',
@@ -18,6 +19,7 @@ const Home = (props) => {
             bacon: false, 
             spicySausage: false,
         },
+        glutenFree: false,
       }
     
       // the current form to be submitted
@@ -70,12 +72,14 @@ const Home = (props) => {
       const submitForm = () => {
         const appendForm = {
           name: currentForm.name.trim(),
+          size: currentForm.size,
           side: currentForm.side,
           sauce: currentForm.sauce,
           special: currentForm.special.trim(),
           toppings: Object.keys(currentForm.toppings).filter(t => {
             return currentForm.toppings[t] //only filter the truely
-          })
+          }),
+          glutenFree: currentForm.glutenFree,
         }
         if (!appendForm.name || !appendForm.side ) return
         postCredential(appendForm)

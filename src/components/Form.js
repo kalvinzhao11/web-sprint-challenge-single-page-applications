@@ -18,6 +18,11 @@ const Form = (props) => {
         update(name, value)
     }
 
+    const onGluttenChange = (evt) =>{
+        const {name, checked } = evt.target
+        update(name, checked)
+    }
+
     const onCheckboxChange = evt => {
         const { name, checked } = evt.target
         checkboxChange(name, checked)
@@ -26,7 +31,7 @@ const Form = (props) => {
     return (
         <form onSubmit={onSubmit}>
 
-            <label>name&nbsp;
+            <label>Name: &nbsp;
             <input
                 value={value.name}
                 onChange={onInputChange}
@@ -36,7 +41,7 @@ const Form = (props) => {
             </label>
             <div>{error.name}</div>
 
-            <label>Choice of Side&nbsp;
+            <label>Choice of Side: &nbsp;
             <select 
                 value={value.role}
                 onChange={onInputChange}
@@ -47,8 +52,21 @@ const Form = (props) => {
             </select>
             </label>
             <div>{error.size}</div>
+            <br></br>
 
-            <label>Choice of Sauce</label>
+            <label>Size: &nbsp;
+            <select 
+                value={value.size}
+                onChange={onInputChange}
+                name="size"
+                >
+                <option value="small">Small</option>
+                <option value="median">Median</option>
+                <option value="large">Large</option>
+            </select>
+            </label>
+
+            <label>Choice of Sauce: &nbsp;</label>
             <label>Original Red&nbsp;
                 <input 
                     type='radio'
@@ -90,7 +108,7 @@ const Form = (props) => {
             </label>
             <div>{error.sauce}</div>
 
-            <label>Toppings</label>
+            <label>Toppings: &nbsp;</label>
             <label>Pepperoni&nbsp;
             <input 
                 type='checkbox'
@@ -125,7 +143,18 @@ const Form = (props) => {
             </label>
             <div/>
 
-            <label>Special Instrucution&nbsp;
+            <label>Choice of Substitute: &nbsp;
+                <input 
+                    type='checkbox'
+                    name='glutenFree'
+                    checked={value.toppings.glutenFree}
+                    onChange={onGluttenChange}
+                />
+
+            </label>
+            
+
+            <label>Special Instrucution: &nbsp;
             <input
                 value={value.special}
                 onChange={onInputChange}
@@ -134,6 +163,8 @@ const Form = (props) => {
             />
             </label>
             <div>{error.special}</div>
+
+
 
         <button onSubmit={onsubmit} disabled={disabled}>Submit</button>
         </form>
